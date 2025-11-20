@@ -1,0 +1,293 @@
+<!-- 
+    ARCHIVED CONTENT - NOT FOR PUBLICATION
+    This file contains the Dataset, Benchmark, and Results sections
+    that were removed from the main website for the initial release.
+    These sections can be restored after paper acceptance or as needed.
+-->
+
+<!-- DATASET SECTION -->
+<section id="dataset" class="section alt-bg">
+    <div class="container">
+        <h2>Dataset</h2>
+        
+        <h3>Collection and Curation</h3>
+        <p>
+            AbdCTBench is a comprehensive dataset derived from 23,506 abdominal CTs of 18,719 patients (≈1.26 scans per patient), representing one of the largest CT-derived biomarker datasets for abdominal composition analysis. The data was collected from CT scans conducted from August 11, 2003, to September 9, 2021, under IRB approval.
+        </p>
+        <p>
+            Processing proceeded in two parallel phases:
+        </p>
+        <ul>
+            <li><strong>Surface mesh rendering:</strong> DICOM image series were converted to STL files, then to 2D PNG images of size 384×384 via PyVista</li>
+            <li><strong>Biomarker calculation:</strong> DICOM series were processed by OSCAR, which creates segmentation masks to calculate metrics at vertebral levels (L1-L5, T10-T12) and organ-specific regions (liver, spleen, kidneys, aorta)</li>
+        </ul>
+
+        <h3>Dataset Statistics</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h4>Demographics</h4>
+                <ul>
+                    <li>Mean age: 55.3 years (SD: 16.51)</li>
+                    <li>56.8% female, 43.2% male</li>
+                    <li>Balanced sex distribution</li>
+                </ul>
+            </div>
+            <div class="stat-card">
+                <h4>Clinical Conditions</h4>
+                <ul>
+                    <li>Essential hypertension: 53.7%</li>
+                    <li>Type 2 Diabetes: 44.6%</li>
+                    <li>Impaired glucose tolerance: 38.0%</li>
+                    <li>Tobacco use: 26.8%</li>
+                    <li>Myocardial Infarction: 23.1%</li>
+                </ul>
+            </div>
+            <div class="stat-card">
+                <h4>HCC Comorbidities</h4>
+                <ul>
+                    <li>Average 1.8 HCC conditions per patient</li>
+                    <li>HCC 108 (Vascular Disease): 22.6%</li>
+                    <li>HCC 19 (Diabetes w/o complications): 13.0%</li>
+                    <li>HCC 12 (Cancers): 10.9%</li>
+                </ul>
+            </div>
+            <div class="stat-card">
+                <h4>Biomarkers</h4>
+                <ul>
+                    <li>Calcium Scoring Agatston: 1200.9 ± 3126.5</li>
+                    <li>Kidney median HU: 90.0 ± 58.8</li>
+                    <li>Spleen volume: 223.9 ± 127.2 cm³</li>
+                    <li>Comprehensive adipose tissue analysis</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Data Splits</h3>
+        <p>
+            The dataset was split at the patient ID level to prevent data leakage:
+        </p>
+        <ul>
+            <li><strong>Training:</strong> 70%</li>
+            <li><strong>Validation:</strong> 20%</li>
+            <li><strong>Test:</strong> 10%</li>
+        </ul>
+        <p>
+            All hyperparameter tuning and model selection used only the train and validation sets. The test set was held out exclusively for final evaluation.
+        </p>
+
+        <h3>HIPAA Compliance</h3>
+        <p>
+            The dataset was processed for HIPAA Safe Harbor compliance, removing all protected health information (PHI) for safe public release. All patient identifiers were replaced with randomized study IDs, and only anonymized abdominal surface meshes are distributed.
+        </p>
+    </div>
+</section>
+
+<!-- BENCHMARK SECTION -->
+<section id="benchmark" class="section">
+    <div class="container">
+        <h2>Benchmark Tasks</h2>
+        
+        <p>
+            From AbdCTBench, we curate <strong>10 biomarker prediction tasks</strong> from 2D surface mesh images. We design a single-target learning framework to benchmark selected architectures on biomarker prediction.
+        </p>
+
+        <h3>Prediction Tasks</h3>
+        <div class="tasks-grid">
+            <div class="task-card">
+                <h4>Mortality Prediction</h4>
+                <p>Binary classification for patient death during follow-up</p>
+                <span class="prevalence">11.4%</span>
+            </div>
+            <div class="task-card">
+                <h4>HCC 108 (Vascular Disease)</h4>
+                <p>Binary classification for vascular disease</p>
+                <span class="prevalence">22.6%</span>
+            </div>
+            <div class="task-card">
+                <h4>HCC 12 (Cancers)</h4>
+                <p>Binary classification for breast, prostate, and other cancers</p>
+                <span class="prevalence">10.9%</span>
+            </div>
+            <div class="task-card">
+                <h4>HCC 96 (Cardiac Arrhythmias)</h4>
+                <p>Binary classification for cardiac arrhythmias</p>
+                <span class="prevalence">9.0%</span>
+            </div>
+            <div class="task-card">
+                <h4>HCC 18 (Diabetes w/ Complications)</h4>
+                <p>Binary classification for diabetes with chronic complications</p>
+                <span class="prevalence">8.3%</span>
+            </div>
+            <div class="task-card">
+                <h4>HCC 111 (COPD)</h4>
+                <p>Binary classification for chronic obstructive pulmonary disease</p>
+                <span class="prevalence">7.1%</span>
+            </div>
+            <div class="task-card">
+                <h4>Calcium Score</h4>
+                <p>Binary classification for Agatston score > 1000</p>
+                <span class="prevalence">21.2%</span>
+            </div>
+            <div class="task-card">
+                <h4>Myocardial Infarction</h4>
+                <p>Binary classification for previous MI</p>
+                <span class="prevalence">23.1%</span>
+            </div>
+            <div class="task-card">
+                <h4>Type 2 Diabetes</h4>
+                <p>Binary classification for diabetes at scan time</p>
+                <span class="prevalence">44.6%</span>
+            </div>
+            <div class="task-card">
+                <h4>Age Prediction</h4>
+                <p>Regression task for patient age at scan time</p>
+                <span class="prevalence">Mean: 55.3 years</span>
+            </div>
+        </div>
+
+        <h3>Architectures Evaluated</h3>
+        <div class="arch-grid">
+            <div class="arch-card">
+                <h4>CNN Architectures</h4>
+                <ul>
+                    <li>ResNet-18/34</li>
+                    <li>ResNet-50 (RadImageNet)</li>
+                    <li>DenseNet-121</li>
+                    <li>EfficientNet-B0</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h4>Vision Transformers</h4>
+                <ul>
+                    <li>ViT-Small (DINOv2)</li>
+                    <li>Swin Transformer-Base</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Training Protocol</h3>
+        <p>
+            We establish a standardized training protocol for fair and reproducible comparison:
+        </p>
+        <ul>
+            <li><strong>Optimizer:</strong> AdamW with weight decay 1×10⁻⁴</li>
+            <li><strong>Learning Rate:</strong> Evaluated across 1×10⁻⁵, 1×10⁻⁴, 1×10⁻³</li>
+            <li><strong>Batch Size:</strong> 16</li>
+            <li><strong>Training:</strong> 100 epochs with early stopping (patience: 10)</li>
+            <li><strong>Dropout:</strong> 0.2</li>
+            <li><strong>Class Imbalance:</strong> Inverse frequency weighting, balanced batch sampling, threshold optimization</li>
+        </ul>
+    </div>
+</section>
+
+<!-- RESULTS SECTION -->
+<section id="results" class="section alt-bg">
+    <div class="container">
+        <h2>Results</h2>
+        
+        <h3>Key Findings</h3>
+        <div class="results-highlight">
+            <div class="result-card highlight">
+                <h4>Age Prediction</h4>
+                <p class="metric">MAE: 6.22 years</p>
+                <p class="metric">R²: 0.757</p>
+                <p class="model">Best: EfficientNet-B0</p>
+            </div>
+            <div class="result-card highlight">
+                <h4>Mortality Prediction</h4>
+                <p class="metric">AUROC: 0.839</p>
+                <p class="model">Best: ResNet-18</p>
+            </div>
+            <div class="result-card highlight">
+                <h4>Diabetes w/ Complications</h4>
+                <p class="metric">AUROC: 0.799</p>
+                <p class="model">Best: ResNet-18</p>
+            </div>
+        </div>
+
+        <h3>Architectural Insights</h3>
+        <ul>
+            <li><strong>Smaller architectures consistently matched or surpassed larger models:</strong> ResNet-18/34 and EfficientNet-B0 often outperformed ResNet-50 despite having fewer parameters</li>
+            <li><strong>Medical-domain pretraining (RadImageNet) did not outperform standard ImageNet pretraining</strong> on this task, suggesting that surface geometry representations differ from typical medical imaging</li>
+            <li><strong>Self-supervised pretraining (DINOv2) showed competitive performance</strong> but did not achieve the best results on any biomarker</li>
+            <li><strong>Vision Transformers (ViT-Small, Swin) demonstrated robustness</strong> across tasks, with Swin achieving best performance on several biomarkers</li>
+        </ul>
+
+        <h3>Performance Summary</h3>
+        <div class="results-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Best Model</th>
+                        <th>Metric</th>
+                        <th>Performance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Age</td>
+                        <td>EfficientNet-B0</td>
+                        <td>MAE</td>
+                        <td>6.22 years</td>
+                    </tr>
+                    <tr>
+                        <td>Mortality</td>
+                        <td>ResNet-18</td>
+                        <td>AUROC</td>
+                        <td>0.839</td>
+                    </tr>
+                    <tr>
+                        <td>Calcium Score</td>
+                        <td>ResNet-34</td>
+                        <td>AUROC</td>
+                        <td>0.848</td>
+                    </tr>
+                    <tr>
+                        <td>Myocardial Infarction</td>
+                        <td>EfficientNet-B0</td>
+                        <td>AUROC</td>
+                        <td>0.732</td>
+                    </tr>
+                    <tr>
+                        <td>Type 2 Diabetes</td>
+                        <td>ResNet-34</td>
+                        <td>AUROC</td>
+                        <td>0.742</td>
+                    </tr>
+                    <tr>
+                        <td>HCC 108 (Vascular)</td>
+                        <td>ResNet-18</td>
+                        <td>AUROC</td>
+                        <td>0.763</td>
+                    </tr>
+                    <tr>
+                        <td>HCC 111 (COPD)</td>
+                        <td>ResNet-18</td>
+                        <td>AUROC</td>
+                        <td>0.769</td>
+                    </tr>
+                    <tr>
+                        <td>HCC 18 (Diabetes w/ Complications)</td>
+                        <td>ResNet-18</td>
+                        <td>AUROC</td>
+                        <td>0.799</td>
+                    </tr>
+                    <tr>
+                        <td>HCC 96 (Arrhythmias)</td>
+                        <td>EfficientNet-B0</td>
+                        <td>AUROC</td>
+                        <td>0.763</td>
+                    </tr>
+                    <tr>
+                        <td>HCC 12 (Cancers)</td>
+                        <td>ResNet-34</td>
+                        <td>AUROC</td>
+                        <td>0.591</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+

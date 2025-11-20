@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbdCTBench: Learning Clinical Biomarker Representations from Abdominal Surface Geometry</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AbdCTBench</h1>
+            <p class="subtitle">Learning Clinical Biomarker Representations from Abdominal Surface Geometry</p>
+            <p class="venue">[Under Review] ICLR 2026 Datasets and Benchmarks Track</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="#citation">Citation</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="overview" class="section">
+            <div class="container">
+                <h2>Overview</h2>
+                <div class="content-grid">
+                    <div class="text-content">
+                        <p>
+                            Body composition analysis through CT and MRI imaging provides critical insights for cardiometabolic health assessment but remains limited by accessibility barriers including radiation exposure, high costs, and infrastructure requirements.
+                        </p>
+                        <p>
+                            We present <strong>AbdCTBench</strong>, a large-scale dataset containing <strong>23,506 CT-derived abdominal surface meshes</strong> from <strong>18,719 patients</strong>, paired with <strong>87 comorbidity labels</strong>, <strong>31 specific diagnosis codes</strong>, and <strong>16 CT-derived biomarkers</strong>. Our key insight is that external surface geometry is predictive of internal tissue composition, enabling accessible health screening through consumer devices.
+                        </p>
+                        <p>
+                            We establish comprehensive benchmarks across multiple computer vision architectures, demonstrating that models can learn robust surface-to-biomarker representations directly from 2D mesh projections. Our best-performing models achieve clinically relevant accuracy: age prediction with MAE 6.22 years (R²=0.757), mortality prediction with AUROC 0.839, and diabetes (with chronic complications) detection with AUROC 0.799.
+                        </p>
+                    </div>
+                    <div class="stats-box">
+                        <h3>Key Statistics</h3>
+                        <ul>
+                            <li><strong>23,506</strong> CT-derived surface meshes</li>
+                            <li><strong>18,719</strong> unique patients</li>
+                            <li><strong>87</strong> HCC comorbidity labels</li>
+                            <li><strong>31</strong> ICD-10 diagnosis codes</li>
+                            <li><strong>16</strong> CT-derived biomarkers</li>
+                            <li><strong>10</strong> benchmark tasks</li>
+                            <li><strong>7</strong> architectures evaluated</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="section">
+            <div class="container">
+                <h2>Download & Access</h2>
+                <div class="download-info">
+                    <p>
+                        <strong>Note:</strong> The dataset will be released publicly upon acceptance of the paper, or earlier if approvals clear sooner. The repository will include:
+                    </p>
+                    <ul>
+                        <li>Full dataset (23,506 surface mesh images)</li>
+                        <li>All biomarker labels and metadata</li>
+                        <li>Data splits (train/validation/test)</li>
+                        <li>Evaluation protocols and scripts</li>
+                        <li>Pretrained model checkpoints</li>
+                        <li>Full conversion pipeline (DICOM → STL → PNG)</li>
+                        <li>Biomarker computation scripts through OSCAR</li>
+                    </ul>
+                    <p>
+                        For access requests or questions, please contact us through the paper submission system or GitHub issues (once the repository is public).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="citation" class="section alt-bg">
+            <div class="container">
+                <h2>Citation</h2>
+                <div class="citation-box">
+                    <pre><code>@inproceedings{abdctbench2026,
+  title={AbdCTBench: Learning Clinical Biomarker Representations from Abdominal Surface Geometry},
+  author={Anonymous},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2026},
+  note={Under Review}
+}</code></pre>
+                </div>
+                <p class="citation-note">
+                    <em>Note: This is a placeholder citation. The final citation will be updated upon publication.</em>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 AbdCTBench. Dataset and benchmark for ICLR 2026.</p>
+            <p class="disclaimer">
+                This dataset is provided for research purposes only. All data has been de-identified in accordance with HIPAA Safe Harbor requirements.
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
