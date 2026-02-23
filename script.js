@@ -29,7 +29,7 @@ window.addEventListener('scroll', () => {
     navLinks.forEach(link => {
         link.style.borderBottomColor = 'transparent';
         if (link.getAttribute('href') === `#${current}`) {
-            link.style.borderBottomColor = '#2563eb';
+            link.style.borderBottomColor = '#8C1515'; /* Stanford Cardinal Red */
         }
     });
 });
