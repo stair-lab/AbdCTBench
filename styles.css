@@ -21,13 +21,18 @@
     --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Playfair Display', Georgia, serif;
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-body);
     line-height: 1.6;
     color: var(--text-primary);
-    background-color: var(--bg-primary);
+    background:
+        radial-gradient(circle at 5% 10%, rgba(140, 21, 21, 0.06), transparent 28%),
+        radial-gradient(circle at 95% 2%, rgba(46, 45, 41, 0.06), transparent 22%),
+        var(--bg-primary);
 }
 
 .container {
@@ -38,18 +43,37 @@ body {
 
 /* Header */
 header {
-    background: var(--primary-color); /* Stanford Cardinal Red */
+    background: linear-gradient(120deg, #7f1212 0%, #8C1515 45%, #5d1010 100%);
     color: white;
     padding: 4rem 0;
     text-align: center;
     border-bottom: 4px solid var(--primary-dark);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.2), transparent 30%),
+        radial-gradient(circle at 90% 100%, rgba(255, 255, 255, 0.12), transparent 35%);
+    pointer-events: none;
+}
+
+header .container {
+    position: relative;
+    z-index: 1;
 }
 
 header h1 {
     font-size: 3.5rem;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
+    font-family: var(--font-heading);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
 }
 
 .subtitle {
@@ -77,19 +101,21 @@ header h1 {
 .btn-github {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background-color: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.12));
     color: white;
     text-decoration: none;
-    border-radius: 6px;
-    font-weight: 500;
-    transition: background-color 0.2s, transform 0.2s;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    font-weight: 700;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .btn-paper:hover,
 .btn-github:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
+    background-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
 .stanford-branding {
@@ -106,12 +132,13 @@ header h1 {
 
 /* Navigation */
 nav {
-    background-color: var(--bg-primary);
+    background: rgba(255, 255, 255, 0.9);
     border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(8px);
 }
 
 nav ul {
@@ -127,7 +154,7 @@ nav a {
     color: var(--text-primary);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s;
+    transition: color 0.2s, border-color 0.2s;
     padding: 0.5rem 0;
     border-bottom: 2px solid transparent;
 }
@@ -150,7 +177,9 @@ nav a:hover {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 2rem;
-    color: var(--text-primary);
+    color: var(--primary-dark);
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
 }
 
 .section h3 {
@@ -158,14 +187,15 @@ nav a:hover {
     font-weight: 600;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
-    color: var(--text-primary);
+    color: var(--primary-dark);
+    font-family: var(--font-heading);
 }
 
 .section h4 {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
-    color: var(--text-primary);
+    color: var(--primary-dark);
 }
 
 .section p {
@@ -249,11 +279,17 @@ nav a:hover {
 
 /* Stats Box */
 .stats-box {
-    background: white;
+    background: linear-gradient(165deg, #ffffff 0%, #fdf6f6 100%);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 2rem;
     box-shadow: var(--shadow-md);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stats-box:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
 }
 
 .stats-box h3 {
@@ -290,11 +326,17 @@ nav a:hover {
 }
 
 .stat-card {
-    background: white;
+    background: linear-gradient(170deg, #ffffff 0%, #fafafa 100%);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 1.5rem;
     box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .stat-card h4 {
@@ -322,9 +364,9 @@ nav a:hover {
 }
 
 .task-card {
-    background: white;
+    background: linear-gradient(170deg, #ffffff 0%, #fcf7f7 100%);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 1.5rem;
     box-shadow: var(--shadow);
     transition: transform 0.2s, box-shadow 0.2s;
@@ -365,9 +407,9 @@ nav a:hover {
 }
 
 .arch-card {
-    background: white;
+    background: linear-gradient(170deg, #ffffff 0%, #fdf8f8 100%);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 2rem;
     box-shadow: var(--shadow-md);
 }
@@ -401,9 +443,9 @@ nav a:hover {
 }
 
 .result-card {
-    background: white;
+    background: linear-gradient(170deg, #ffffff 0%, #fcf8f8 100%);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 2rem;
     box-shadow: var(--shadow);
 }
@@ -450,7 +492,7 @@ table {
 }
 
 thead {
-    background-color: var(--primary-color); /* Stanford Cardinal */
+    background: linear-gradient(120deg, var(--primary-dark), var(--primary-color));
     color: white;
 }
 
@@ -477,9 +519,9 @@ tbody tr:last-child td {
 
 /* Download Section */
 .download-info {
-    background: white;
+    background: linear-gradient(170deg, #ffffff 0%, #fdf7f7 100%);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 2rem;
     box-shadow: var(--shadow-md);
 }
@@ -490,9 +532,9 @@ tbody tr:last-child td {
 
 /* Citation */
 .citation-box {
-    background: var(--bg-alt);
+    background: linear-gradient(170deg, #f8f6f6 0%, #f2eded 100%);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 2rem;
     margin-top: 1rem;
 }
@@ -518,7 +560,7 @@ tbody tr:last-child td {
 
 /* Footer */
 footer {
-    background-color: var(--text-primary);
+    background: linear-gradient(135deg, #2E2D29 0%, #1f1f1c 100%);
     color: white;
     padding: 3rem 0;
     text-align: center;
