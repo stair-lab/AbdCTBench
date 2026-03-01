@@ -266,6 +266,40 @@ nav a:hover {
     line-height: 1.6;
 }
 
+.gradcam-figure {
+    margin: 1.5rem auto 1rem;
+    max-width: 980px;
+}
+
+.gradcam-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+}
+
+.gradcam-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: var(--shadow-md);
+}
+
+.gradcam-figure figcaption {
+    margin-top: 0.85rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.gradcam-note {
+    margin-top: 1rem;
+    padding: 1rem 1.2rem;
+    background: linear-gradient(180deg, #fff7f7, #fdf1f1);
+    border: 1px solid #edd1d1;
+    border-radius: 10px;
+    font-size: 0.98rem;
+}
+
 /* Content Grid */
 .content-grid {
     display: grid;
@@ -281,6 +315,10 @@ nav a:hover {
 
     .overview-panel-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gradcam-grid {
+        grid-template-columns: 1fr;
     }
 }
 

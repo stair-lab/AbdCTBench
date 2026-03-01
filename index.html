@@ -368,6 +368,28 @@
                         </tbody>
                     </table>
                 </div>
+
+                <h3>Effective Learning of Representations from Abdominal Surface Geometry</h3>
+                <p>
+                    From the performance metrics reported above, we do not see drastic differences between the architectures considered. This demonstrates the viability of effective representation learning from abdominal surface geometry for clinically relevant biomarker prediction. The effectiveness is observed across all architectures and biomarkers, except HCC-12 (Breast, Prostate, and other Cancers), whereby external surface geometry may not be predictive of the comorbidity from a clinical perspective either. To demonstrate this further, we apply Gradient-Weighted Class Activation Mapping (Grad-CAM) to the input images to visualize the representations.
+                </p>
+                <p>
+                    In specific, we load ResNet-18 (one of the best-performing models on HCC-18, Diabetes with Chronic Complications), and apply Grad-CAM on the last convolution layer to visualize the features learned from the surface geometry images. We collect a small random sample of size 100 from the test set, and select compelling examples to demonstrate the effectiveness of the learned representations as hypothesized. The heatmaps identify high attention regions from the surface geometry for the model to make predictions. The F1-optimal threshold of 0.9 was applied for the binary classification.
+                </p>
+
+                <figure class="gradcam-figure">
+                    <div class="gradcam-grid">
+                        <img src="images/gradcam/080520-2161_heatmap.png" alt="Grad-CAM visualization 1 for HCC-18 prediction">
+                        <img src="images/gradcam/041510-0283_heatmap.png" alt="Grad-CAM visualization 2 for HCC-18 prediction">
+                    </div>
+                    <figcaption>
+                        Grad-CAM visualizations showing learned representations from abdominal surface geometry. The heatmaps highlight regions of interest that the ResNet-18 model focuses on for HCC-18 (Diabetes with Chronic Complications) prediction.
+                    </figcaption>
+                </figure>
+
+                <p class="gradcam-note">
+                    While Grad-CAM is a popular interpretability method, it has been shown to be unreliable (Kindermans et al., 2019). We provide these visualizations as hypothesis-generating and these are not used to support any core claims. All of our main conclusions rely on quantitative performance metrics; the paper does not draw any causal or mechanistic inferences from Grad-CAM.
+                </p>
             </div>
         </section>
 
